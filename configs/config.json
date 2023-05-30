@@ -1,0 +1,52 @@
+{
+    "model_config":{
+        "model_name": "ClassificationTransformer",
+        "model_kwargs": {
+            "encoder": {
+                "n_blocks": 6,
+                "src_vocab_size": -1,
+                "max_seq_len": -1,
+                "d_embedding": 40,
+                "ff_d_hidden": 80,
+                "n_heads": 4,
+                "p_drop": 0.1
+            },
+            "mlp": {
+                "l1": {
+                    "out_features": 40
+                },
+                "l2": {
+                    "in_features": 40,
+                    "out_features": 30
+                },
+                "l3": {
+                    "in_features": 30,
+                    "out_features": -1
+                }
+            },
+            "pad_idx": 0
+        }
+    },
+
+    "loss_config": {
+        "loss_fn": "nn.CrossEntropyLoss",
+        "num_labels": -1
+    },
+
+    "optim_config": {
+        "optim_fn": "torch.optim.Adam",
+        "optim_kwargs":{
+            "lr": 0.00001,
+            "betas" : [0.9, 0.999],
+            "weight_decay" : 0.00001
+        }
+    },
+    "trainer_config": {
+        "max_epochs" : 100,
+        "devices" : 1,
+        "precision" : 16
+    },
+    "max_num_token_per_batch": 1e7,
+    "wandb_project": "uniprot-transformer",
+    "dryrun": false
+}
